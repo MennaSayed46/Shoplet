@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import style from './Home.module.css'
 import Ratings from '../Ratings/Ratings'
 import { Link } from 'react-router-dom'
-import { handleHeartContext } from '../../Context/handleHeartContext'
+import { handleHeartContext } from '../../Context/HandleHeartContext'
 import { SearchContext } from '../../Context/SearchProvider'
 import Loadin from '../Loadin/Loadin'
+// import { handleHeartContext } from '../../Context/handleHeartContext'
 
 export default function Home () {
   const [data, setData] = useState({ products: [] })

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import style from './ProductsByCategory.module.css'
 import { Link, useParams } from 'react-router-dom'
-import { handleHeartContext } from '../../Context/handleHeartContext'
+import { handleHeartContext } from '../../Context/HandleHeartContext'
 import Ratings from '../Ratings/Ratings'
 import Loadin from '../Loadin/Loadin'
 export default function ProductsByCategory () {
