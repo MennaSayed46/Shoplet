@@ -1,0 +1,22 @@
+
+.footer p{
+        font-family: "Edu NSW ACT Hand Pre", cursive;
+
+}
+.desc,
+.iconName,.gmail,.phoneNum,.online p {
+    font-family: "Edu NSW ACT Hand Pre", cursive;
+    font-size: 14px;
+
+}
+.contact{
+    font-size: 20px;
+        font-family: "Edu NSW ACT Hand Pre", cursive;
+
+  /* font-family: "Ancizar Serif", serif; */
+
+}
+
+.ecommerce{
+    font-size: 14px;
+}
