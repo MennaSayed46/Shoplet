@@ -3,7 +3,7 @@ import style from './ProductDetails.module.css'
 import { useParams } from 'react-router-dom'
 import Ratings from '../Ratings/Ratings'
 import Button from '@mui/material/Button'
-import { handleHeartContext } from '../../Context/handleHeartContext'
+import { handleHeartContext } from '../../Context/HandleHeartContext'
 import Reviews from '../Reviews/Reviews'
 import Loadin from '../Loadin/Loadin'
 
