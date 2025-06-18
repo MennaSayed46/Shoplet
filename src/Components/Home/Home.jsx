@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import style from './Home.module.css'
-import Button from '@mui/material/Button'
 import Ratings from '../Ratings/Ratings'
 import { Link } from 'react-router-dom'
 import { handleHeartContext } from '../../Context/handleHeartContext'
