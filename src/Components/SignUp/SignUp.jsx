@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import style from './SignUp.module.css'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { UserContext } from '../../Context/UserContext '
 export default function SignUp () {
   let [loadingSpinner, setloadingSpinner] = useState(false)
   let navigate = useNavigate()
   let [APIERR, setAPIERR] = useState(null)
+  let { UserData, setUserData } = useContext(UserContext)
 
   let validationSchema = yup.object().shape({
     name: yup
@@ -19,10 +21,11 @@ export default function SignUp () {
     password: yup
       .string()
       .matches(
-        /^[A-Z]\w{5,15}$/,
-        'password is must include the first letter is capital.the min length of password is 5 and max is 15'
+        /^[A-Za-z][A-Za-z0-9@#$%!?]{5,15}$/,
+        'Password must start with a letter, be 6–16 characters, and can include @ # $ % ! ?'
       )
-      .required('password is required'),
+      .required('Password is required'),
+
     rePassword: yup
       .string()
       .oneOf([yup.ref('password')], 'Passwords must match')
@@ -42,9 +45,11 @@ export default function SignUp () {
       )
       console.log('the data of register', data)
       localStorage.setItem('userToken', data.token)
+      localStorage.setItem('userEmail', data.user.email)
+      localStorage.setItem('userName', data.user.name)
       navigate('/')
       setloadingSpinner(false)
-      // setUserData(data.token)
+      setUserData(data.token)
     } catch (err) {
       setAPIERR(err.response.data.message)
       setloadingSpinner(false)
@@ -220,7 +225,7 @@ export default function SignUp () {
             {loadingSpinner ? (
               <button
                 type='submit'
-                className='bg-green-700 hover:bg-green-800 dark:bg-[#9c27b0] px-6 py-3 rounded-lg focus:outline-none focus:ring-4 sm:w-auto text-xl text-center'
+                className='dark:bg-[#9c27b0] px-6 py-3 rounded-lg focus:outline-none focus:ring-4 sm:w-auto text-xl text-center'
               >
                 <i className='fa-solid fa-spinner fa-pulse'></i>
               </button>

@@ -1,10 +1,13 @@
+import { Navigate } from 'react-router-dom';
+import style from'./ProtectedRoute.module.css'
 import React from 'react'
-import style from './ProtectedRoute.module.css'
-export default function ProtectedRoute() {
-  return (
-    <>
-    <h1>ProtectedRoute</h1>
-      
-    </>
-  )
+
+export default function ProtectedRoute({children}) {
+  if(localStorage.getItem('userToken')){
+    return children;
+  }else{
+   return <Navigate to={'/login'}></Navigate>
+  }
+
+  
 }
