@@ -1,13 +1,13 @@
 
 import { Link, useNavigate } from 'react-router-dom'
-import style from './LogIn.module.css'
+import style from './Login.module.css'
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import * as yup from 'yup'
 import { Formik, useFormik } from 'formik'
 import { UserContext } from '../../Context/UserContext '
 
-export default function LogIn () {
+export default function Login () {
   let navigate = useNavigate()
   let [APIERR, setAPIERR] = useState(null)
   let [loadingSpinner, setloadingSpinner] = useState(false)
@@ -37,10 +37,13 @@ export default function LogIn () {
 
   let validationSchema = yup.object().shape({
     email: yup.string().email('email is invalid').required('email is required'),
-    password: yup
-      .string()
-      .matches(/^[A-Z]\w{5,15}$/, 'password is invalid')
-      .required('password is required')
+   password: yup
+         .string()
+         .matches(
+           /^[A-Za-z][A-Za-z0-9@#$%!?]{5,15}$/,
+           'Password must start with a letter, be 6–16 characters, and can include @ # $ % ! ?'
+         )
+         .required('Password is required')
   })
 
   let formik = useFormik({
