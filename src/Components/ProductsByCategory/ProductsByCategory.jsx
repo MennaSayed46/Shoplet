@@ -4,15 +4,22 @@ import { Link, useParams } from 'react-router-dom'
 import { handleHeartContext } from '../../Context/HandleHeartContext'
 import Ratings from '../Ratings/Ratings'
 import Loadin from '../Loadin/Loadin'
+import 'aos/dist/aos.css'
+import AOS from 'aos'
+import { AddToCart } from './../../Context/AddToCartProvider';
+import { motion } from 'framer-motion'
 export default function ProductsByCategory () {
   let { category } = useParams()
   const [productsByCategoryName, setProductsByCategoryName] = useState([])
+    let { AddToCartFunc } = useContext(AddToCart)
+
+
   useEffect(() => {
     // console.log(category)
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
     getProductsByCategoryName()
   }, [category])
-    let { wishlist, handleHeart } = useContext(handleHeartContext)
+  let { wishlist, handleHeart } = useContext(handleHeartContext)
 
   //function get products by categoryName
   async function getProductsByCategoryName () {
@@ -23,12 +30,18 @@ export default function ProductsByCategory () {
       let data = await response.json()
       console.log(data.products)
       setProductsByCategoryName(data.products)
-      console.log('productsByCategoryName',productsByCategoryName);
-      
+      console.log('productsByCategoryName', productsByCategoryName)
     } catch {
       console.log('error in get products by category name')
     }
   }
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true
+    })
+  }, [])
   return (
     <>
       {productsByCategoryName?.length > 0 ? (
@@ -103,17 +116,43 @@ export default function ProductsByCategory () {
                 </Link>
 
                 {/* add to cart */}
-                <button
-                  className={`border-2 mt-3 border-solid border-[#9c27b0] w-full text-center text-[#9c27b0]  hover:bg-black hover:text-white hover:border-none`}
+                {/* add to cart */}
+                <motion.button
+                  className='relative mt-3 p-2 border-[#9c27b0] border-2 border-solid rounded w-full overflow-hidden text-[#9c27b0] text-center-md'
+                  onClick={() => AddToCartFunc(product.id)}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: '#000',
+                    color: '#fff',
+                    borderColor: '#000'
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{
+                    duration: 0.3,
+                    ease: 'easeInOut'
+                  }}
                 >
-                  {' '}
-                  <i className='px-1 fa-solid fa-cart-shopping'></i>Add to cart
-                </button>
+                  <motion.i
+                    className='px-1 fa-solid fa-cart-shopping'
+                    whileHover={{
+                      x: [0, -3, 0],
+                      rotate: [0, -10, 0]
+                    }}
+                    transition={{
+                      duration: 0.5,
+                      repeat: Infinity,
+                      repeatType: 'loop'
+                    }}
+                  />
+                  Add to cart
+                </motion.button>
               </div>
             )
           })}
         </div>
-      ):<Loadin/>}
+      ) : (
+        <Loadin />
+      )}
     </>
   )
 }

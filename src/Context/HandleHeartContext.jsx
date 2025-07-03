@@ -14,7 +14,13 @@ export default function HandleHeartContext ({ children }) {
     } else {
       //adding
       setWishlist([...wishlist, productID])
-      toast.success('Added to Wishlist!')
+      toast.success('Added to Wishlist!', {
+      position: 'top-right',
+      autoClose: 5000, // 5 ثواني
+      style: {
+        width: '250px'
+      }
+    })
     }
   }
 

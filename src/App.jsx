@@ -18,6 +18,9 @@ import Forget from './Components/Forget/Forget'
 import Reset from './Components/Reset/Reset'
 import UserContextProvider from './Context/UserContext '
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
+import AddToCartProvider from './Context/AddToCartProvider'
+import Cart from './Components/Cart/Cart'
+import Sponsors from './Components/Sponsors/Sponsors'
 
 function App () {
   const router = createBrowserRouter([
@@ -25,13 +28,61 @@ function App () {
       path: '/',
       element: <Layout />,
       children: [
-        { index: true, element:<ProtectedRoute><Home/></ProtectedRoute> },
-        { path: '/home', element:<ProtectedRoute><Home/></ProtectedRoute> },
-        { path: 'productDetails/:id', element: <ProtectedRoute><ProductDetails /></ProtectedRoute> },
-        { path: 'reviews/:id', element: <ProtectedRoute><Reviews /></ProtectedRoute> },
+        {
+          index: true,
+          element: (
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          )
+        },
+        {
+          path: '/home',
+          element: (
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          )
+        },
+        {
+          path: 'productDetails/:id',
+          element: (
+            <ProtectedRoute>
+              <ProductDetails />
+            </ProtectedRoute>
+          )
+        },
+        {
+          path: '/cart',
+          element: (
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          )
+        },
+        {
+          path: '/sponsors',
+          element: (
+            <ProtectedRoute>
+              <Sponsors />
+            </ProtectedRoute>
+          )
+        },
+        {
+          path: 'reviews/:id',
+          element: (
+            <ProtectedRoute>
+              <Reviews />
+            </ProtectedRoute>
+          )
+        },
         {
           path: 'productByCategory/:category',
-          element: <ProtectedRoute><ProductsByCategory /></ProtectedRoute>
+          element: (
+            <ProtectedRoute>
+              <ProductsByCategory />
+            </ProtectedRoute>
+          )
         },
         //temprary
         { path: 'signUp', element: <SignUp /> },
@@ -46,12 +97,14 @@ function App () {
   return (
     <>
       <UserContextProvider>
-        <SearchProvider>
-          <HandleHeartContext>
-            <RouterProvider router={router}></RouterProvider>
-            <Toaster />
-          </HandleHeartContext>
-        </SearchProvider>
+        <AddToCartProvider>
+          <SearchProvider>
+            <HandleHeartContext>
+              <RouterProvider router={router}></RouterProvider>
+              <Toaster />
+            </HandleHeartContext>
+          </SearchProvider>
+        </AddToCartProvider>
       </UserContextProvider>
     </>
   )

@@ -6,6 +6,7 @@ import axios from 'axios'
 import * as yup from 'yup'
 import { Formik, useFormik } from 'formik'
 import { UserContext } from '../../Context/UserContext '
+import loginFigma from '../../../public/Desktop - 1 (3).png'
 
 export default function Login () {
   let navigate = useNavigate()
@@ -57,7 +58,13 @@ export default function Login () {
 
   return (
     <>
-      <form
+    <div className="flex md:flex-row flex-col bg-red-600 mt-[-100px] mb-4 w-full h-auto parent" >
+      <div className="left w-full">
+        <img src={loginFigma} alt="loginImg" className='w-full h-full object-fit-cover' />
+      </div>
+
+      <div className="right bg-[#efefec] p-6 w-full">
+          <form
         onSubmit={formik.handleSubmit}
         className='flex flex-col justify-center items-center mx-auto max-w-md h-screen'
       >
@@ -146,6 +153,9 @@ export default function Login () {
           </button>
         )}
       </form>
+      </div>
+
+    </div>
     </>
   )
 }

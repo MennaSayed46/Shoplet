@@ -9,13 +9,16 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { motion, AnimatePresence } from 'framer-motion'
 import Categories from '../Categories/Categories'
 import { UserContext } from '../../Context/UserContext '
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { AddToCart } from '../../Context/AddToCartProvider'
 
 export default function Navbar () {
+  let { AddToCartFunc } = useContext(AddToCart)
   const [openSideBar, setOpenSideBar] = useState(false)
   const userToken = localStorage.getItem('userToken')
   let { UserData, setUserData } = useContext(UserContext)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  let {cartItemsLength}=useContext(AddToCart)
 
   function LogOut () {
     localStorage.removeItem('userToken')
@@ -118,18 +121,25 @@ export default function Navbar () {
                 </Button>
 
                 {/* cart */}
-                <Button
-                  color='secondary'
-                  sx={{
-                    borderRadius: '50%',
-                    minWidth: 0,
-                    '&:hover': {
-                      borderRadius: '50%'
-                    }
-                  }}
-                >
-                  <i className='p-2 text-xl fa-solid fa-cart-shopping'></i>
-                </Button>
+                <Link to='/cart'>
+                  <Button
+                    className='relative'
+                    color='secondary'
+                    sx={{
+                      borderRadius: '50%',
+                      minWidth: 0,
+                      '&:hover': {
+                        borderRadius: '50%'
+                      }
+                    }}
+                  >
+                    <i className='p-2 text-xl fa-solid fa-cart-shopping'></i>
+
+                    <div className='right-0 bottom-[20px] absolute bg-white p-1 rounded-[50%] number'>
+                     {cartItemsLength}
+                    </div>
+                  </Button>
+                </Link>
 
                 {/* logout button */}
                 <Button
