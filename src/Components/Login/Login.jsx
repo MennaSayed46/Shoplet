@@ -58,7 +58,7 @@ export default function Login () {
 
   return (
     <>
-    <div className="flex md:flex-row flex-col bg-red-600 mt-[-100px] mb-4 w-full h-auto parent" >
+    <div className="flex md:flex-row flex-col mt-[-100px] mb-4 w-full h-auto parent" >
       <div className="left w-full">
         <img src={loginFigma} alt="loginImg" className='w-full h-full object-fit-cover' />
       </div>
