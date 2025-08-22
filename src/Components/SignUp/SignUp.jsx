@@ -69,7 +69,7 @@ export default function SignUp () {
   })
   return (
     <>
-      <div className='flex md:flex-row flex-col bg-red-600 mt-[-100px] mb-4 w-full h-auto md:h-[90vh] parent'>
+      <div className='flex md:flex-row flex-col  mt-[-100px] mb-1 w-full h-auto md:h-[90vh] parent'>
         {/* left */}
         <div className='left relative flex flex-row gap-6 bg-[#9c27b0] p-6 w-full'>
           <div className='top-0 bottom-0 absolute inset-x-0 bg-[#000000] opacity-50'></div>
